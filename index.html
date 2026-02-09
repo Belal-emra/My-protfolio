@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>بلال زرد | أثر وبقاء</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
             --gold: #D4AF37;
             --gold-light: #F4E089;
             --dark-bg: #0F172A;
-            --glass: rgba(30, 41, 59, 0.7);
+            --glass: rgba(30, 41, 59, 0.85);
             --border: rgba(212, 175, 55, 0.3);
+            --active: #10b981;
         }
 
-        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
             margin: 0;
@@ -25,160 +27,112 @@
             color: white;
             font-family: 'Tajawal', sans-serif;
             overflow-x: hidden;
+            padding-bottom: 80px;
         }
 
-        /* تأثير التمرير الناعم */
-        html { scroll-behavior: smooth; }
-
-        /* الهيدر الفخم */
+        /* الهيدر */
         header {
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 50px 20px 30px;
             background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--dark-bg) 100%), url('https://www.transparenttextures.com/patterns/arabesque.png');
             border-bottom: 1px solid var(--border);
         }
 
         .profile-img {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 3px solid var(--gold);
             padding: 3px;
             object-fit: cover;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
             margin-bottom: 15px;
         }
 
-        h1 {
-            font-family: 'Amiri', serif;
-            color: var(--gold);
-            font-size: 2.2rem;
-            margin: 10px 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
+        h1 { font-family: 'Amiri', serif; color: var(--gold); margin: 5px 0; font-size: 1.8rem; }
+        .subtitle { color: #94a3b8; font-size: 0.9rem; letter-spacing: 1px; }
 
-        .subtitle {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* الحاويات الزجاجية */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
+        /* البطاقات */
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
         }
-
-        .glass-card:hover { transform: translateY(-5px); border-color: var(--gold); }
 
         .section-title {
             color: var(--gold-light);
             font-family: 'Amiri', serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             border-bottom: 1px solid var(--border);
             padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        /* أزرار الصوتيات */
-        .audio-btn {
-            background: linear-gradient(45deg, #1e293b, #334155);
-            color: white;
-            border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 12px;
-            width: 100%;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .audio-btn:active { transform: scale(0.98); background: var(--gold); color: black; }
-        .audio-btn i { color: var(--gold); }
-        .audio-btn:active i { color: black; }
-
-        /* المسبحة الإلكترونية */
-        .tasbih-box {
+        /* مواقيت الصلاة */
+        .prayer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             text-align: center;
         }
-        .counter-display {
-            font-size: 4rem;
-            font-weight: bold;
-            color: var(--gold);
-            font-family: 'Courier New', monospace;
-            margin: 20px 0;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        .prayer-item {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid transparent;
         }
+        .prayer-item.next-prayer {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            animation: pulse 2s infinite;
+        }
+        .prayer-name { font-size: 0.8rem; color: #cbd5e1; display: block; }
+        .prayer-time { font-weight: bold; font-size: 1.1rem; color: var(--gold); }
+
+        @keyframes pulse { 0% {box-shadow: 0 0 0 0 rgba(212,175,55, 0.4);} 70% {box-shadow: 0 0 0 10px rgba(212,175,55, 0);} 100% {box-shadow: 0 0 0 0 rgba(212,175,55, 0);} }
+
+        /* مشغل القرآن */
+        select.quran-select {
+            width: 100%;
+            padding: 12px;
+            background: #1e293b;
+            color: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Tajawal';
+            font-size: 1rem;
+            margin-bottom: 15px;
+            direction: rtl;
+        }
+        .audio-player-box { text-align: center; }
+        audio { width: 100%; border-radius: 30px; margin-top: 10px; }
+
+        /* المسبحة */
         .tasbih-btn {
             background: var(--gold);
             color: #000;
             border: none;
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            font-size: 2rem;
+            font-size: 1.8rem;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tasbih-btn:active { transform: scale(0.9); box-shadow: 0 0 5px rgba(212, 175, 55, 0.8); }
-
-        /* حديث عشوائي */
-        #hadith-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            font-family: 'Amiri', serif;
-            text-align: center;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .refresh-btn {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
             margin-top: 10px;
-            width: 100%;
+            cursor: pointer;
         }
+        .counter-display { font-size: 3rem; font-weight: bold; color: white; font-family: monospace; }
 
-        /* الفوتر */
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 0.8rem;
-            color: #64748b;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .social-icons a {
-            color: white;
-            margin: 0 10px;
-            font-size: 1.2rem;
-            text-decoration: none;
-        }
+        footer { text-align: center; padding: 20px; color: #64748b; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -186,107 +140,188 @@
     <header>
         <img src="IMG_3237.jpeg" alt="بلال زرد" class="profile-img">
         <h1>بلال عبد الهادي زرد</h1>
-        <div class="subtitle">طالب نظم معلومات إدارية | إسطنبول</div>
-        <p style="color: #cbd5e1; font-size: 0.9rem; margin-top: 15px;">
-            "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي"
-        </p>
+        <div class="subtitle">طالب نظم معلومات (MIS) | إسطنبول</div>
     </header>
 
     <div class="container">
 
         <div class="glass-card">
-            <div class="section-title"><i class="fas fa-quote-right"></i> حديث اليوم</div>
-            <div id="hadith-text">"من يُرِدِ اللهُ به خيرًا يُفَقِّهْهُ في الدين"</div>
-            <button class="refresh-btn" onclick="newHadith()"><i class="fas fa-sync-alt"></i> حديث آخر</button>
+            <div class="section-title">
+                <i class="fas fa-mosque"></i> مواقيت الصلاة (إسطنبول)
+            </div>
+            <div id="date-display" style="text-align:center; color:#94a3b8; margin-bottom:15px; font-size:0.9rem;">جاري التحميل...</div>
+            
+            <div class="prayer-grid" id="prayer-times-container">
+                <div class="prayer-item"><span class="prayer-name">الفجر</span><span class="prayer-time">--:--</span></div>
+                <div class="prayer-item"><span class="prayer-name">الظهر</span><span class="prayer-time">--:--</span></div>
+                <div class="prayer-item"><span class="prayer-name">العصر</span><span class="prayer-time">--:--</span></div>
+                <div class="prayer-item"><span class="prayer-name">المغرب</span><span class="prayer-time">--:--</span></div>
+                <div class="prayer-item"><span class="prayer-name">العشاء</span><span class="prayer-time">--:--</span></div>
+            </div>
+            
+            <button onclick="enableAdhan()" style="width:100%; margin-top:15px; background:transparent; border:1px solid var(--gold); color:var(--gold); padding:8px; border-radius:8px; font-size:0.8rem;">
+                <i class="fas fa-volume-up"></i> تفعيل تنبيه الأذان
+            </button>
+            <audio id="adhanAudio" src="https://media.blubrry.com/muslim_central_quran/podcasts.qurancentral.com/adhan/mishary-rashid-alafasy/adhan-mishary-rashid-alafasy-01.mp3" preload="none"></audio>
         </div>
 
         <div class="glass-card">
-            <div class="section-title"><i class="fas fa-quran"></i> تلاوات خاشعة</div>
-            <div class="audio-btn" onclick="playAudio('https://server8.mp3quran.net/afs/018.mp3')">
-                <span>سورة الكهف (العفاسي)</span>
-                <i class="fas fa-play-circle"></i>
+            <div class="section-title"><i class="fas fa-quran"></i> القرآن الكريم</div>
+            <p style="font-size:0.9rem; color:#cbd5e1; margin-bottom:10px;">اختر السورة للاستماع (الشيخ مشاري العفاسي):</p>
+            
+            <select class="quran-select" id="surahSelect" onchange="playSurah()">
+                <option value="">-- اختر السورة --</option>
+                </select>
+
+            <div class="audio-player-box">
+                <div id="current-surah-name" style="color:var(--gold); font-weight:bold; margin-bottom:5px;"></div>
+                <audio id="quranPlayer" controls></audio>
             </div>
-            <div class="audio-btn" onclick="playAudio('https://server8.mp3quran.net/afs/036.mp3')">
-                <span>سورة يس (العفاسي)</span>
-                <i class="fas fa-play-circle"></i>
-            </div>
-            <div class="audio-btn" onclick="playAudio('https://server8.mp3quran.net/afs/067.mp3')">
-                <span>سورة الملك (العفاسي)</span>
-                <i class="fas fa-play-circle"></i>
-            </div>
-            <audio id="quranPlayer" style="display:none;"></audio>
         </div>
 
-        <div class="glass-card tasbih-box">
-            <div class="section-title" style="justify-content: center;"><i class="fas fa-fingerprint"></i> المسبحة الإلكترونية</div>
-            <p style="color: #94a3b8;">سبحان الله وبحمده، سبحان الله العظيم</p>
+        <div class="glass-card" style="text-align:center;">
+            <div class="section-title" style="justify-content:center;"><i class="fas fa-fingerprint"></i> المسبحة</div>
             <div class="counter-display" id="counter">0</div>
             <button class="tasbih-btn" onclick="incrementCounter()"><i class="fas fa-plus"></i></button>
-            <br><br>
-            <button class="refresh-btn" onclick="resetCounter()" style="width: auto; font-size: 0.8rem;">تصفير العداد</button>
-        </div>
-
-        <div class="glass-card">
-            <div class="section-title"><i class="fas fa-laptop-code"></i> عني مهنياً</div>
-            <p style="line-height: 1.6; color: #cbd5e1;">
-                أعمل في مجال المبيعات وأدرس نظم المعلومات الإدارية (MIS). أطمح لدمج التكنولوجيا مع الإدارة لبناء حلول ذكية.
-            </p>
+            <br>
+            <button onclick="resetCounter()" style="background:none; border:none; color:#64748b; margin-top:10px; text-decoration:underline;">تصفير</button>
         </div>
 
     </div>
 
     <footer>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>صدقة جارية عني وعن والديّ - تصميم وبرمجة بلال زرد &copy; 2026</p>
+        <p>تصميم وبرمجة: بلال زرد &copy; 2026</p>
     </footer>
 
     <script>
-        // كود الحديث العشوائي
-        const hadiths = [
-            "قال رسول الله ﷺ: «من دلَّ على خير، فله مثل أجر فاعله»",
-            "قال رسول الله ﷺ: «لا تغضب، ولك الجنة»",
-            "قال رسول الله ﷺ: «اتق الله حيثما كنت، وأتبع السيئة الحسنة تمحها»",
-            "قال رسول الله ﷺ: «الكلمة الطيبة صدقة»",
-            "قال رسول الله ﷺ: «عينان لا تمسهما النار: عين بكت من خشية الله، وعين باتت تحرس في سبيل الله»"
-        ];
+        // --- 1. كود مواقيت الصلاة (API) ---
+        async function getPrayerTimes() {
+            const dateDisplay = document.getElementById('date-display');
+            const container = document.getElementById('prayer-times-container');
+            
+            try {
+                // جلب البيانات لإسطنبول
+                const response = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Istanbul&country=Turkey&method=13');
+                const data = await response.json();
+                const timings = data.data.timings;
+                const hijri = data.data.date.hijri;
 
-        function newHadith() {
-            const random = Math.floor(Math.random() * hadiths.length);
-            document.getElementById('hadith-text').style.opacity = 0;
-            setTimeout(() => {
-                document.getElementById('hadith-text').innerText = hadiths[random];
-                document.getElementById('hadith-text').style.opacity = 1;
-            }, 300);
-        }
+                // عرض التاريخ
+                dateDisplay.innerText = `${hijri.day} ${hijri.month.ar} ${hijri.year} هـ`;
 
-        // كود مشغل القرآن
-        let audio = document.getElementById('quranPlayer');
-        function playAudio(url) {
-            if (!audio.paused && audio.src === url) {
-                audio.pause();
-            } else {
-                audio.src = url;
-                audio.play();
+                // قائمة الصلوات للعرض
+                const prayers = [
+                    { name: 'الفجر', time: timings.Fajr, key: 'Fajr' },
+                    { name: 'الظهر', time: timings.Dhuhr, key: 'Dhuhr' },
+                    { name: 'العصر', time: timings.Asr, key: 'Asr' },
+                    { name: 'المغرب', time: timings.Maghrib, key: 'Maghrib' },
+                    { name: 'العشاء', time: timings.Isha, key: 'Isha' }
+                ];
+
+                container.innerHTML = '';
+                
+                // تحديد الصلاة القادمة
+                let nextPrayerFound = false;
+                const now = new Date();
+                const currentTime = now.getHours() * 60 + now.getMinutes();
+
+                prayers.forEach(prayer => {
+                    // تحويل وقت الصلاة لدقائق للمقارنة
+                    const [hours, minutes] = prayer.time.split(':').map(Number);
+                    const prayerTimeMinutes = hours * 60 + minutes;
+                    
+                    let isNext = false;
+                    if (!nextPrayerFound && prayerTimeMinutes > currentTime) {
+                        isNext = true;
+                        nextPrayerFound = true;
+                    }
+
+                    const div = document.createElement('div');
+                    div.className = `prayer-item ${isNext ? 'next-prayer' : ''}`;
+                    div.innerHTML = `
+                        <span class="prayer-name">${prayer.name}</span>
+                        <span class="prayer-time">${prayer.time}</span>
+                    `;
+                    container.appendChild(div);
+
+                    // التحقق من وقت الأذان
+                    if (hours === now.getHours() && minutes === now.getMinutes() && now.getSeconds() < 2) {
+                        playAdhan();
+                    }
+                });
+
+            } catch (error) {
+                dateDisplay.innerText = "تعذر تحميل المواقيت، تأكد من الإنترنت";
             }
         }
 
-        // كود المسبحة
+        // تشغيل الأذان
+        function playAdhan() {
+            const audio = document.getElementById('adhanAudio');
+            audio.play().catch(e => console.log("يجب تفاعل المستخدم أولاً لتشغيل الصوت"));
+        }
+
+        function enableAdhan() {
+            const audio = document.getElementById('adhanAudio');
+            audio.play();
+            audio.pause();
+            audio.currentTime = 0;
+            alert("تم تفعيل التنبيهات الصوتية بنجاح ✅");
+        }
+
+        // تحديث المواقيت كل دقيقة
+        getPrayerTimes();
+        setInterval(getPrayerTimes, 60000);
+
+
+        // --- 2. كود القرآن الكريم ---
+        const surahs = [
+            "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
+            "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
+            "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمـل", "القصص", "العنكبوت", "الروم",
+            "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+            "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق",
+            "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة",
+            "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج",
+            "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس",
+            "التكوير", "الإنفطار", "المطففين", "الإنشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد",
+            "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات",
+            "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
+            "المسد", "الإخلاص", "الفلق", "الناس"
+        ];
+
+        const select = document.getElementById('surahSelect');
+        surahs.forEach((name, index) => {
+            const option = document.createElement('option');
+            option.value = index + 1; // رقم السورة
+            option.text = `${index + 1}. ${name}`;
+            select.appendChild(option);
+        });
+
+        function playSurah() {
+            const surahNum = select.value.toString().padStart(3, '0'); // يحول 1 إلى 001
+            if (!select.value) return;
+            
+            const audioUrl = `https://server8.mp3quran.net/afs/${surahNum}.mp3`;
+            const player = document.getElementById('quranPlayer');
+            const label = document.getElementById('current-surah-name');
+            
+            player.src = audioUrl;
+            label.innerText = "جاري التشغيل: سورة " + surahs[select.value - 1];
+            player.play();
+        }
+
+        // --- 3. كود المسبحة ---
         let count = 0;
         function incrementCounter() {
             count++;
             document.getElementById('counter').innerText = count;
-            // اهتزاز بسيط للهاتف عند التسبيح (تجربة مستخدم رائعة)
-            if (navigator.vibrate) navigator.vibrate(50);
+            if (navigator.vibrate) navigator.vibrate(40);
         }
         function resetCounter() {
             count = 0;
             document.getElementById('counter').innerText = 0;
         }
     </script>
-
 </body>
 </html>
