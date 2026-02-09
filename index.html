@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بلال زرد | أثر وبقاء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E089;
+            --dark-bg: #0F172A;
+            --glass: rgba(30, 41, 59, 0.7);
+            --border: rgba(212, 175, 55, 0.3);
+        }
+
+        * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            margin: 0;
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 70%);
+            color: white;
+            font-family: 'Tajawal', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* تأثير التمرير الناعم */
+        html { scroll-behavior: smooth; }
+
+        /* الهيدر الفخم */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--dark-bg) 100%), url('https://www.transparenttextures.com/patterns/arabesque.png');
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            padding: 3px;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-family: 'Amiri', serif;
+            color: var(--gold);
+            font-size: 2.2rem;
+            margin: 10px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* الحاويات الزجاجية */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+
+        .section-title {
+            color: var(--gold-light);
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* أزرار الصوتيات */
+        .audio-btn {
+            background: linear-gradient(45deg, #1e293b, #334155);
+            color: white;
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 12px;
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .audio-btn:active { transform: scale(0.98); background: var(--gold); color: black; }
+        .audio-btn i { color: var(--gold); }
+        .audio-btn:active i { color: black; }
+
+        /* المسبحة الإلكترونية */
+        .tasbih-box {
+            text-align: center;
+        }
+        .counter-display {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--gold);
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+        .tasbih-btn {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tasbih-btn:active { transform: scale(0.9); box-shadow: 0 0 5px rgba(212, 175, 55, 0.8); }
+
+        /* حديث عشوائي */
+        #hadith-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-family: 'Amiri', serif;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .refresh-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            color: #64748b;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80" alt="بلال زرد" class="profile-img">
+        <h1>بلال عبد الهادي زرد</h1>
+        <div class="subtitle">طالب نظم معلومات إدارية | إسطنبول</div>
+        <p style="color: #cbd5e1; font-size: 0.9rem; margin-top: 15px;">
+            "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي"
+        </p>
+    </header>
+
+    <div class="container">
+
+        <div class="glass-card">
+            <div class="section-title"><i class="fas fa-quote-right"></i> حديث اليوم</div>
+            <div id="hadith-text">"من يُرِدِ اللهُ به خيرًا يُفَقِّهْهُ في الدين"</div>
+            <button class="refresh-btn" onclick="newHadith()"><i class="fas fa-sync-alt"></i> حديث آخر</button>
+        </div>
+
+        <div class="glass-card">
+            <div class="section-title"><i class="fas fa-quran"></i> تلاوات خاشعة</div>
+            <div class="audio-btn" onclick="playAudio('https://server8.mp3quran.net/afs/018.mp3')">
+                <span>سورة الكهف (العفاسي)</span>
+                <i class="fas fa-play-circle"></i>
+            </div>
+            <div class="audio-btn" onclick="playAudio('https://server8.mp3quran.net/afs/036.mp3')">
+                <span>سورة يس (العفاسي)</span>
+                <i class="fas fa-play-circle"></i>
+            </div>
+            <div class="audio-btn" onclick="playAudio('https://server8.mp3quran.net/afs/067.mp3')">
+                <span>سورة الملك (العفاسي)</span>
+                <i class="fas fa-play-circle"></i>
+            </div>
+            <audio id="quranPlayer" style="display:none;"></audio>
+        </div>
+
+        <div class="glass-card tasbih-box">
+            <div class="section-title" style="justify-content: center;"><i class="fas fa-fingerprint"></i> المسبحة الإلكترونية</div>
+            <p style="color: #94a3b8;">سبحان الله وبحمده، سبحان الله العظيم</p>
+            <div class="counter-display" id="counter">0</div>
+            <button class="tasbih-btn" onclick="incrementCounter()"><i class="fas fa-plus"></i></button>
+            <br><br>
+            <button class="refresh-btn" onclick="resetCounter()" style="width: auto; font-size: 0.8rem;">تصفير العداد</button>
+        </div>
+
+        <div class="glass-card">
+            <div class="section-title"><i class="fas fa-laptop-code"></i> عني مهنياً</div>
+            <p style="line-height: 1.6; color: #cbd5e1;">
+                أعمل في مجال المبيعات وأدرس نظم المعلومات الإدارية (MIS). أطمح لدمج التكنولوجيا مع الإدارة لبناء حلول ذكية.
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>صدقة جارية عني وعن والديّ - تصميم وبرمجة بلال زرد &copy; 2026</p>
+    </footer>
+
+    <script>
+        // كود الحديث العشوائي
+        const hadiths = [
+            "قال رسول الله ﷺ: «من دلَّ على خير، فله مثل أجر فاعله»",
+            "قال رسول الله ﷺ: «لا تغضب، ولك الجنة»",
+            "قال رسول الله ﷺ: «اتق الله حيثما كنت، وأتبع السيئة الحسنة تمحها»",
+            "قال رسول الله ﷺ: «الكلمة الطيبة صدقة»",
+            "قال رسول الله ﷺ: «عينان لا تمسهما النار: عين بكت من خشية الله، وعين باتت تحرس في سبيل الله»"
+        ];
+
+        function newHadith() {
+            const random = Math.floor(Math.random() * hadiths.length);
+            document.getElementById('hadith-text').style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById('hadith-text').innerText = hadiths[random];
+                document.getElementById('hadith-text').style.opacity = 1;
+            }, 300);
+        }
+
+        // كود مشغل القرآن
+        let audio = document.getElementById('quranPlayer');
+        function playAudio(url) {
+            if (!audio.paused && audio.src === url) {
+                audio.pause();
+            } else {
+                audio.src = url;
+                audio.play();
+            }
+        }
+
+        // كود المسبحة
+        let count = 0;
+        function incrementCounter() {
+            count++;
+            document.getElementById('counter').innerText = count;
+            // اهتزاز بسيط للهاتف عند التسبيح (تجربة مستخدم رائعة)
+            if (navigator.vibrate) navigator.vibrate(50);
+        }
+        function resetCounter() {
+            count = 0;
+            document.getElementById('counter').innerText = 0;
+        }
+    </script>
+
+</body>
+</html>
