@@ -1,85 +1,317 @@
-}
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bilal Abdelhady | صدقة جارية</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بلال زرد | الموقع الديني الشامل</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E089;
+            --purple-glow: rgba(139, 92, 246, 0.4);
+            --dark-bg: #0F172A;
+            --glass: rgba(15, 23, 42, 0.85);
+            --border: rgba(212, 175, 55, 0.3);
+            --text: #ecf0f1;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
+            padding-bottom: 80px;
+            overflow-x: hidden;
+        }
+
+        /* === السحابة البنفسجية المتحركة === */
+        .fog-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .fog-layer {
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at center, var(--purple-glow) 0%, transparent 60%);
+            opacity: 0.6;
+            animation: fogMove 20s infinite alternate linear;
+        }
+        @keyframes fogMove {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        /* === Navbar === */
+        nav {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 10px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        nav a { color: var(--gold-light); text-decoration: none; font-size: 0.9rem; font-weight: bold; }
+        nav a i { margin-left: 5px; }
+
+        /* === Header === */
+        header {
+            background: linear-gradient(to bottom, rgba(15,23,42,0.6), var(--dark-bg)), url('https://images.unsplash.com/photo-1565552629477-0dfdc6322742?auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 90px 20px 50px;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .profile-img {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            object-fit: cover;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6); /* وهج بنفسجي للصورة */
+            margin-bottom: 10px;
+        }
+
+        header h1 { font-family: 'Amiri', serif; font-size: 2.2rem; color: var(--gold); margin: 5px 0; }
+        .bio { font-size: 0.9rem; color: #cbd5e1; max-width: 500px; margin: 10px auto; line-height: 1.6; }
+        .sadaqa-badge { background: var(--gold); color: black; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-top: 10px; }
+
+        /* === Cards === */
+        section { padding: 15px; max-width: 700px; margin: auto; }
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 { color: var(--gold-light); font-family: 'Amiri', serif; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 0; }
+
+        /* === Prayer Times & Mosque === */
+        .mosque-img {
+            width: 100%; height: 180px;
+            object-fit: cover; border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+        }
+        .prayer-row { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .next-prayer { background: rgba(212, 175, 55, 0.2); border-radius: 5px; color: var(--gold); font-weight: bold; }
+
+        /* === Azkar === */
+        .azkar-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid var(--gold); color: white;
+            padding: 10px; margin: 5px; width: 45%; border-radius: 10px; cursor: pointer;
+        }
+        .azkar-content { display: none; text-align: right; margin-top: 15px; max-height: 300px; overflow-y: auto; }
+        .zekr-item { background: rgba(0,0,0,0.2); padding: 10px; margin-bottom: 8px; border-radius: 8px; border-right: 3px solid var(--gold); font-size: 0.95rem; }
+
+        /* === Controls === */
+        select, button.main-btn {
+            width: 100%; padding: 12px; margin-top: 10px;
+            border-radius: 10px; border: 1px solid var(--gold);
+            background: rgba(0,0,0,0.3); color: white;
+            font-family: 'Tajawal'; font-size: 1rem;
+        }
+        button.main-btn { background: var(--gold); color: black; font-weight: bold; cursor: pointer; }
+
+        /* === Footer === */
+        footer { text-align: center; padding: 30px; color: #64748b; font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 30px; }
+
+    </style>
 </head>
 
 <body>
 
-<nav>
-<h2>Bilal Abdelhady</h2>
-<ul>
-<li><a href="#about">نبذة</a></li>
-<li><a href="#quran">القرآن</a></li>
-<li><a href="#tasbeeh">السبحة</a></li>
-<li><a href="#hadith">أحاديث</a></li>
-<li><a href="#prayer">الصلاة</a></li>
-<li><a href="#radio">إذاعة</a></li>
-</ul>
-</nav>
+    <div class="fog-container"><div class="fog-layer"></div></div>
 
-<header>
-<h1>صدقة جارية 🤍</h1>
-<p>عن بلال عبد الهادي ووالديه رحمه الله</p>
-</header>
+    <nav>
+        <a href="#quran">القرآن</a>
+        <a href="#prayer">الصلاة</a>
+        <a href="#azkar">الأذكار</a>
+        <a href="#about">من أنا</a>
+    </nav>
 
-<section id="about" class="card">
-<h2>نبذة تعريفية</h2>
-<p>
-اسمي بلال عبد الهادي<br>
-طالب نظم المعلومات – جامعة توب كابي إسطنبول 🇹🇷
-</p>
-<p>
-هذا الموقع صدقة جارية أسأل الله أن يتقبّلها 🤲
-</p>
-</section>
+    <header id="about">
+        <img src="IMG_3237.jpeg" alt="بلال زرد" class="profile-img">
+        <h1>بلال عبد الهادي زرد</h1>
+        
+        <div class="bio">
+            طالب نظم معلومات إدارية (MIS) بجامعة توب كابي في إسطنبول.<br>
+            أسعى لدمج التقنية بالقيم، وهذا الموقع هو مساحتي الرقمية للأجر والفائدة.
+        </div>
+        
+        <div class="sadaqa-badge">صدقة جارية عني وعن والديّ</div>
+    </header>
 
-<section id="quran" class="card">
-<h2>القرآن الكريم</h2>
+    <section>
+        <div class="card">
+            <h2><i class="fas fa-quote-right"></i> رسالة قرآنية</h2>
+            <p id="ayah" style="font-size: 1.1rem; line-height: 1.8;">جاري التحميل...</p>
+        </div>
+    </section>
 
-<select id="surahSelect"></select>
+    <section id="prayer">
+        <div class="card">
+            <h2><i class="fas fa-mosque"></i> مواقيت الصلاة (إسطنبول)</h2>
+            
+            <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=600&q=80" alt="مسجد السلطان أحمد" class="mosque-img">
+            
+            <div id="prayer-container">جاري التحميل...</div>
 
-<div id="ayat"></div>
+            <button onclick="enableAdhan()" id="adhanBtn" style="background: transparent; border: 1px solid var(--gold); color: var(--gold); width: 100%; padding: 10px; margin-top: 15px; border-radius: 10px;">
+                <i class="fas fa-volume-up"></i> اضغط لتفعيل صوت الأذان
+            </button>
+            <audio id="adhanAudio" src="https://media.blubrry.com/muslim_central_quran/podcasts.qurancentral.com/adhan/mishary-rashid-alafasy/adhan-mishary-rashid-alafasy-01.mp3"></audio>
+        </div>
+    </section>
 
-<audio id="player" controls></audio>
-</section>
+    <section id="azkar">
+        <div class="card">
+            <h2><i class="fas fa-hands-praying"></i> أذكار المسلم</h2>
+            <div style="display:flex; justify-content:center;">
+                <button class="azkar-btn" onclick="toggleAzkar('morning')">☀️ الصباح</button>
+                <button class="azkar-btn" onclick="toggleAzkar('evening')">🌙 المساء</button>
+            </div>
 
-<section id="tasbeeh" class="card center">
-<h2>السبحة الإلكترونية</h2>
+            <div id="morning-azkar" class="azkar-content">
+                <div class="zekr-item">اللهم بك أصبحنا وبك أمسينا، وبك نحيا وبك نموت وإليك النشور.</div>
+                <div class="zekr-item">أصبحنا على فطرة الإسلام، وعلى كلمة الإخلاص، وعلى دين نبينا محمد ﷺ.</div>
+                <div class="zekr-item">سبحان الله وبحمده: عدد خلقه، ورضا نفسه، وزنة عرشه، ومداد كلماته. (3 مرات)</div>
+                <div class="zekr-item">يا حي يا قيوم برحمتك أستغيث، أصلح لي شأني كله ولا تكلني إلى نفسي طرفة عين.</div>
+            </div>
 
-<div id="counter">0</div>
+            <div id="evening-azkar" class="azkar-content">
+                <div class="zekr-item">اللهم بك أمسينا وبك أصبحنا، وبك نحيا وبك نموت وإليك المصير.</div>
+                <div class="zekr-item">أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له.</div>
+                <div class="zekr-item">أعوذ بكلمات الله التامات من شر ما خلق. (3 مرات)</div>
+                <div class="zekr-item">بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم. (3 مرات)</div>
+            </div>
+        </div>
+    </section>
 
-<button onclick="tasbeeh()">تسبيح</button>
-<button onclick="resetTasbeeh()">تصفير</button>
-</section>
+    <section id="quran">
+        <div class="card">
+            <h2><i class="fas fa-quran"></i> القرآن الكريم</h2>
+            <select onchange="playSurah(this.value)">
+                <option value="">-- اختر السورة --</option>
+                <option value="001">1. الفاتحة</option>
+                <option value="018">18. الكهف</option>
+                <option value="036">36. يس</option>
+                <option value="055">55. الرحمن</option>
+                <option value="056">56. الواقعة</option>
+                <option value="067">67. الملك</option>
+                <option value="112">112. الإخلاص</option>
+                <option value="113">113. الفلق</option>
+                <option value="114">114. الناس</option>
+            </select>
+            <br><br>
+            <audio id="player" controls style="width:100%; border-radius: 20px;"></audio>
+        </div>
+    </section>
 
-<section id="hadith" class="card">
-<h2>أحاديث نبوية</h2>
-<div id="hadithBox">...</div>
-</section>
+    <section>
+        <div class="card">
+            <h2><i class="fas fa-fingerprint"></i> السبحة الإلكترونية</h2>
+            <div id="count" style="font-size: 3.5rem; color: var(--gold); margin: 15px 0;">0</div>
+            <button class="main-btn" onclick="tasbeeh()" style="width: 80px; height: 80px; border-radius: 50%; font-size: 2rem;"><i class="fas fa-plus"></i></button>
+            <div onclick="reset()" style="margin-top: 10px; color: #aaa; text-decoration: underline; cursor:pointer;">تصفير</div>
+        </div>
+    </section>
 
-<section id="prayer" class="card">
-<h2>مواقيت الصلاة</h2>
-<div id="prayerTimes">جاري التحميل...</div>
-</section>
+    <footer>
+        <p>اللهم اجعل هذا العمل خالصاً لوجهك الكريم</p>
+        <p>برمجة وتطوير: <b>بلال زرد</b> &copy; 2026</p>
+    </footer>
 
-<section id="radio" class="card center">
-<h2>إذاعة القرآن الكريم</h2>
-<audio controls>
-<source src="https://live.mp3quran.net:9984/;">
-</audio>
-</section>
+    <script>
+        // === السبحة ===
+        let c = 0;
+        function tasbeeh(){ c++; document.getElementById("count").innerText = c; if(navigator.vibrate) navigator.vibrate(30); }
+        function reset(){ c = 0; document.getElementById("count").innerText = c; }
 
-<button id="darkToggle">🌙</button>
+        // === الأذكار ===
+        function toggleAzkar(type) {
+            document.getElementById('morning-azkar').style.display = 'none';
+            document.getElementById('evening-azkar').style.display = 'none';
+            document.getElementById(type + '-azkar').style.display = 'block';
+        }
 
-<script src="js/script.js"></script>
+        // === مشغل القرآن ===
+        function playSurah(num){
+            if(!num) return;
+            document.getElementById("player").src = "https://server8.mp3quran.net/afs/" + num + ".mp3";
+            document.getElementById("player").play();
+        }
 
+        // === آية عشوائية ===
+        fetch("https://api.alquran.cloud/v1/ayah/random/ar").then(r => r.json()).then(d => {
+            document.getElementById("ayah").innerHTML = `"${d.data.text}" <br><span style="color:var(--gold); font-size:0.9rem;">— ${d.data.surah.name}</span>`;
+        });
+
+        // === مواقيت الصلاة والأذان ===
+        let adhanEnabled = false;
+        function enableAdhan() {
+            document.getElementById('adhanAudio').play().then(() => {
+                document.getElementById('adhanAudio').pause();
+                document.getElementById('adhanAudio').currentTime = 0;
+                adhanEnabled = true;
+                document.getElementById('adhanBtn').innerHTML = '<i class="fas fa-check"></i> الأذان مفعل';
+                document.getElementById('adhanBtn').style.borderColor = "#10b981";
+                document.getElementById('adhanBtn').style.color = "#10b981";
+            });
+        }
+
+        async function getPrayers() {
+            try {
+                const res = await fetch("https://api.aladhan.com/v1/timingsByCity?city=Istanbul&country=Turkey&method=13");
+                const data = await res.json();
+                const t = data.data.timings;
+                
+                const prayers = { 'Fajr': 'الفجر', 'Dhuhr': 'الظهر', 'Asr': 'العصر', 'Maghrib': 'المغرب', 'Isha': 'العشاء' };
+                let html = '';
+                let now = new Date();
+                let currentMinutes = now.getHours() * 60 + now.getMinutes();
+                
+                for (let en in prayers) {
+                    let time = t[en];
+                    let [h, m] = time.split(':').map(Number);
+                    let pMinutes = h * 60 + m;
+                    
+                    // تحديد الصلاة القادمة
+                    // التحقق من الأذان
+                    if (adhanEnabled && h === now.getHours() && m === now.getMinutes() && now.getSeconds() < 5) {
+                        document.getElementById('adhanAudio').play();
+                        alert("حان الآن موعد صلاة " + prayers[en]);
+                    }
+
+                    html += `<div class="prayer-row"><span>${prayers[en]}</span> <span style="color:var(--gold)">${time}</span></div>`;
+                }
+                document.getElementById('prayer-container').innerHTML = html;
+            } catch(e) { console.log(e); }
+        }
+        
+        getPrayers();
+        setInterval(getPrayers, 10000); // تحديث كل 10 ثواني
+    </script>
 </body>
-</ht
+</html>
